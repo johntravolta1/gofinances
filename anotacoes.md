@@ -13,3 +13,4 @@ Aula 'RectButton e BorderlessButton', minuto 3:10:33 => em components/Form/Butto
 ?: Por que tive que instalar o react-native-gesture-handler com o comando 'expo install react-native-gesture-handler', sendo que ele disse que não seria preciso instalar?
 => ler a documentação e pesquisar erro parecido no Troubleshooting (github):
 https://docs.swmansion.com/react-native-gesture-handler/docs/api/components/buttons
+## Para corrigir o erro, foi preciso envolver o Container do botão do gesture-handler (RectButton ou BorderlessButton), com o elemento GestureHandlerRootView from 'react-native-gesture-handler'
