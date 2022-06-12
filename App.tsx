@@ -1,4 +1,6 @@
 import 'react-native-gesture-handler';
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR'
 import React from 'react';
 import { Dashboard } from './src/screens/Dashoboard';
 import {ThemeProvider } from 'styled-components'
@@ -9,6 +11,9 @@ import { Register } from './src/screens/Register';
 import { CategorySelect } from './src/screens/CategorySelect';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppRoutes } from './src/routes/app.routes';
+import { LoadContainer } from './src/screens/Dashoboard/styles';
+import { ActivityIndicator, StatusBar } from 'react-native';
+import { SignIn } from './src/screens/SignIn';
 export default function App() {
 
 
@@ -18,7 +23,11 @@ export default function App() {
   })
 
   if(!fontsLoaded) {
-    return <AppLoading></AppLoading>
+    return (
+      <LoadContainer>
+        <ActivityIndicator color={theme.colors.primary} size='large'/>
+      </LoadContainer> 
+      )
   }
 
 
@@ -26,7 +35,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
 
       <NavigationContainer>
-        <AppRoutes/>
+        <StatusBar barStyle='light-content'></StatusBar>
+        {/* <AppRoutes/> */}
+        <SignIn></SignIn>
       </NavigationContainer>
 
     </ThemeProvider>

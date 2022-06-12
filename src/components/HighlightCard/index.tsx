@@ -4,7 +4,7 @@ import { Container, Header, Title, Icon, Footer, Amount, LastTransaction} from '
 
 interface Props {
     title: string;
-    amount: string;
+    amount?: string;
     lastTransaction: string;
     type: 'up'| 'down' | 'total'
 
