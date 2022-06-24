@@ -14,3 +14,27 @@ Aula 'RectButton e BorderlessButton', minuto 3:10:33 => em components/Form/Butto
 => ler a documentação e pesquisar erro parecido no Troubleshooting (github):
 https://docs.swmansion.com/react-native-gesture-handler/docs/api/components/buttons
 ## Para corrigir o erro, foi preciso envolver o Container do botão do gesture-handler (RectButton ou BorderlessButton), com o elemento GestureHandlerRootView from 'react-native-gesture-handler' (https://github.com/software-mansion/react-native-gesture-handler/issues/699)
+
+> useContext: disponibilizar um valor pra toda aplicação. Vc usa o createcontext e cria um valor no arquivo 1, e usa o useContext para acessar esse valor no arquivo 2.
+arquivo1:
+export const AuthContext = createcontext(['Fernando'])
+
+arquivo2: const data = useContext(AuthContext)
+consolo.log(data) => 'Fernando'
+
+Obs: Também será preciso envolver o componente do arquivo2 no AuthContext: 
+<AuthContext.Provider value={['Fernando']}/>
+    <SiginIn/>
+</AuthContext.Provider>
+E, para facilitar e não precisar utilizarmos o .Provider, criamos uma função que já exporta como AuthContext.Provider cujo componente interno será do tipo ReactNode =>
+interface AuthProviderProps {
+    children: ReactNode;
+}
+
+function AuthProvider({children}:AuthProviderProps) {
+    return(
+        <AuthContext.Provider value={{user}}>
+            {children}
+        </AuthContext.Provider>
+    )
+}

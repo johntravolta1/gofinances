@@ -14,6 +14,11 @@ import { AppRoutes } from './src/routes/app.routes';
 import { LoadContainer } from './src/screens/Dashoboard/styles';
 import { ActivityIndicator, StatusBar } from 'react-native';
 import { SignIn } from './src/screens/SignIn';
+import { AuthProvider, useAuth } from './src/hooks/auth';
+import { Routes } from './src/routes';
+
+
+
 export default function App() {
 
 
@@ -22,7 +27,9 @@ export default function App() {
     Poppins_400Regular, Poppins_500Medium, Poppins_700Bold
   })
 
-  if(!fontsLoaded) {
+  const {userStorageLoading} = useAuth();
+
+  if(!fontsLoaded || userStorageLoading) {
     return (
       <LoadContainer>
         <ActivityIndicator color={theme.colors.primary} size='large'/>
@@ -34,11 +41,11 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
 
-      <NavigationContainer>
         <StatusBar barStyle='light-content'></StatusBar>
         {/* <AppRoutes/> */}
-        <SignIn></SignIn>
-      </NavigationContainer>
+        <AuthProvider>
+          <Routes></Routes>
+        </AuthProvider>
 
     </ThemeProvider>
 
